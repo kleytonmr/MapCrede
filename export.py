@@ -118,7 +118,6 @@ class Crede:
           tar.close()
     except:
       print('Deu merda: '+ fname)
-      # self.file_old.append(fname)
       self.is_error(dir, fname)
 
   # Verifica extensão do arquivo
@@ -155,9 +154,9 @@ class Crede:
     for folder in os.listdir('.'):
       print("==>" + folder)
       try:
-        # self.create_folder(folder + '/')
-        # self.move(folder + '/', folder + '/sem_alteracao', folder + '/arquivos_excel')
-        # self.read_dir(folder)
+        self.create_folder(folder + '/')
+        self.move(folder + '/', folder + '/sem_alteracao', folder + '/arquivos_excel')
+        self.read_dir(folder)
         self.rename(folder)
         self.count = 1
       except:
