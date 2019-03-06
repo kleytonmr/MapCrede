@@ -1,0 +1,40 @@
+# Don't track content of these folders
+__pycache__/
+CREDE 01/
+CREDE 02/
+CREDE 03/
+CREDE 04/
+CREDE 05/
+CREDE 06/
+CREDE 07/
+CREDE 08/
+CREDE 09/
+CREDE 10/
+CREDE 11/
+CREDE 12/
+CREDE 13/
+CREDE 14/
+CREDE 15/
+CREDE 16/
+CREDE 17/
+CREDE 19/
+CREDE 20/
+SEFOR 01/
+SEFOR 02/
+SEFOR 03/
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.ods
+*.xls
+*.xlsx

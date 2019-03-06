@@ -7,14 +7,12 @@ import patoolib
 
 class Crede:
   def __init__(self):
-    self.count = 1
-    self.file_old = []
+    pass
 
   # Cria diretórios padrão
   def create_folder(self, dir):
-    os.mkdir(dir + '/arquivos_excel')
-    os.mkdir(dir + '/sem_alteracao')
-    os.mkdir(dir + '/extração_manual')
+    os.mkdir(dir + '/bases extraidas')
+    os.mkdir(dir + '/bases não extraidas')
 
   # Move os arquivos compactados
   def move(self,path_old, path_new1, path_new2):
@@ -44,125 +42,95 @@ class Crede:
 
   # Lista todos os diretórios
   def read_dir(self, dir):
-    for nome in os.listdir(dir + '/sem_alteracao'):
+    for nome in os.listdir(dir):
       self.tar_xzf(dir,nome)
 
   # Extrai os arquivos compactados
   def tar_xzf(self, dir, fname):
     try:
       if (fname.endswith("tar.gz")):
-          tar = tarfile.open(dir + '/sem_alteracao/' + fname, "r:gz")
-          tar.extractall(dir + '/arquivos_excel')
+          tar = tarfile.open(dir + '/' + fname, "r:gz")
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("tar")):
-          tar = tarfile.open(dir + '/sem_alteracao/' + fname, "r:")
-          tar.extractall(dir + '/arquivos_excel')
+          tar = tarfile.open(dir + '/' + fname, "r:")
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("zip")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("rar")):
-          patoolib.extract_archive(dir + '/sem_alteracao/' + fname, outdir= dir + '/arquivos_excel')
+          patoolib.extract_archive(dir + '/' + fname, outdir= dir)
       elif (fname.endswith("7z")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("ace")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("arj")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("bz2")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("cab")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("gz")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("lz")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("lhz")):
           tar = zipfile.ZipFile(dir + '/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("uue")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("xz")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("z")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("zipx")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
       elif (fname.endswith("001")):
-          tar = zipfile.ZipFile(dir + '/sem_alteracao/' + fname)
-          tar.extractall(dir + '/arquivos_excel')
+          tar = zipfile.ZipFile(dir + '/' + fname)
+          tar.extractall(dir)
           tar.close()
     except:
-      print('Deu merda: '+ fname)
+      print('Movido P/ bases não extraidas: '+ fname)
       self.is_error(dir, fname)
-
-  # Verifica extensão do arquivo
-  def verify_ex(self, ex):
-    if ex == 'xls' or ex == 'xlsx' or ex == 'xlsm' or ex == 'xltm' or ex == 'xltx' or ex == 'ods' or ex == '.ods':
-      return True
-    else:
-      return False
-
-  # Renomeia os arquivos em excel
-  def rename(self, dir):
-    folder = '/arquivos_excel/'
-    for name in os.listdir(dir + folder):
-      n = name.split('.')
-      try:
-        if self.verify_ex(n[1]):
-          os.rename(dir + folder + name, dir + folder + 'Escola_' + str(self.count) + '.' + n[1])
-          self.count = self.count + 1
-        elif self.verify_ex(n[2]):
-          os.rename(dir + folder + name, dir + folder + 'Escola_' + str(self.count) + '.' + n[2])
-          self.count = self.count + 1
-        elif self.verify_ex(n[3]):
-          os.rename(dir + folder + name, dir + folder + 'Escola_' + str(self.count) + '.' + n[3])
-          self.count = self.count + 1
-      except :
-        print(n)
 
   # Move para extração manual
   def is_error(self, dir, name):
-    shutil.move(dir + '/sem_alteracao/' + name, dir + '/extração_manual/')
+    shutil.move(dir + '/' + name, dir + '/bases não extraidas/')
 
   # Percorre todos os diretórios e executa todas as funções.
   def map(self):
     for folder in os.listdir('.'):
-      print("==>" + folder)
+      print("==> " + folder)
       try:
         self.create_folder(folder + '/')
-        self.move(folder + '/', folder + '/sem_alteracao', folder + '/arquivos_excel')
         self.read_dir(folder)
-        self.rename(folder)
-        self.count = 1
       except:
         pass
-
-
 
 
 
